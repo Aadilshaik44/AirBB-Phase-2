@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "_Layout";
+}
+<header class="sticky-top">
+  <nav class="navbar navbar-expand-md navbar-dark admin-nav">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand fw-semibold" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="adminNav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Site</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="admin-main flex-grow-1">
+  @RenderBody()
+</main>

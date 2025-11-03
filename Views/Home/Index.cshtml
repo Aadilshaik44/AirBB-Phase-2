@@ -1,0 +1,70 @@
+﻿@model AirBB.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_MainLayout"; 
+}
+
+<div class="container my-4">
+    <div class="row g-4">
+        <!-- Filter Panel -->
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Filter</h5>
+                    <form asp-action="Filter" method="post" class="vstack gap-3">
+                        <div>
+                            <label class="form-label">Where</label>
+                            <select asp-for="ActiveLocationId" asp-items="Model.Locations" class="form-select"></select>
+                        </div>
+                        <div>
+                            <label class="form-label">When</label>
+                            <input id="dateRange" class="form-control js-daterange" placeholder="MM/DD/YYYY - MM/DD/YYYY"
+       data-start-field="ActiveStart"
+       data-end-field="ActiveEnd" />
+                            <input type="hidden" asp-for="ActiveStart" />
+                            <input type="hidden" asp-for="ActiveEnd" />
+                        </div>
+                        <div>
+                            <label class="form-label">Who</label>
+                            <input asp-for="ActiveGuests" type="number" min="1" class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Apply</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="col-12 col-lg-8">
+            @if (Model.Residences.Count == 0)
+            {
+                <p class="text-muted">No residences match your filters.</p>
+            }
+            else
+            {
+                <div class="cards-compact row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2">
+                    @foreach (var r in Model.Residences)
+                    {
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                <img class="card-img-top" src="~/img/@r.ResidencePicture" alt="@r.Name" />
+                                <div class="card-body">
+                                    <h6 class="fw-bold mb-1">@r.Name</h6>
+                                    <div class="small text-muted">@r.Location?.Name</div>
+                                    <div class="mt-2 small">
+                                        @r.GuestNumber guests • @r.BedroomNumber bd • @r.BathroomNumber ba
+                                    </div>
+                                    <div class="mt-2 fw-semibold">$@r.PricePerNight/night</div>
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <a asp-controller="Residence" asp-action="Details" asp-route-id="@r.ResidenceId" class="btn btn-outline-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
