@@ -52,4 +52,4 @@ jobs:
           app-name: 'AirBB'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1CE0C6401B654D69A9EC74DC9E170819 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF5EA1C859B84863A151FEB3AEBA11D2 }}
